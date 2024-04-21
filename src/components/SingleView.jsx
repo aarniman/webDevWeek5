@@ -9,7 +9,7 @@ const SingleView = (props) => {
     <dialog open>
       <h1>{item.title}</h1>
       <p>{item.description}</p>
-      <img src={item.image} alt={item.title} />
+      <img src={item.filename} alt={item.title} />
       <Button text="Close" handleClick={() => setSelectedItem(null)} />
     </dialog>
   );
