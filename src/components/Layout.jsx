@@ -14,6 +14,9 @@ const Layout = () => (
     <main>
       <Outlet />
     </main>
+    <footer>
+      Copyright 2024
+    </footer>
   </div>
 );
 

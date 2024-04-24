@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const MediaRow = (props) => {
   const { item, setSelectedItem } = props;
 
+  // eslint-disable-next-line no-unused-vars
   const handleClick = () => {
     setSelectedItem(item);
   }
@@ -19,7 +20,7 @@ const MediaRow = (props) => {
       <td>{item.filesize}</td>
       <td>{item.media_type}</td>
       <td>
-        <Link to="/single" state={{ item }}>Show</Link>
+        <Link to={`/media/${item.media_id}`} state={{ item }}>Show</Link>
       </td>
     </tr>
   );
