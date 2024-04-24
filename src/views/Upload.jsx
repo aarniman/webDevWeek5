@@ -1,37 +1,22 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Placeholder from 'react-bootstrap/Placeholder';
+import { useState } from 'react';
 
-function CardExample() {
-  return (
-    <div className="d-flex justify-content-around">
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
-        <Card.Body>
-          <Card.Title>Card Title Upload</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the cards content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
+const Upload = () => {
 
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
-        <Card.Body>
-          <Placeholder as={Card.Title} animation="glow">
-            <Placeholder xs={6} />
-          </Placeholder>
-          <Placeholder as={Card.Text} animation="glow">
-            <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
-            <Placeholder xs={6} /> <Placeholder xs={8} />
-          </Placeholder>
-          <Placeholder.Button variant="primary" xs={6} />
-        </Card.Body>
-      </Card>
-    </div>
-  );
-}
+  const [file] = useState(null);
+  console.log("file: ", file);
 
-export default CardExample;
+  const handleFileChange = (e) => {
+    event.preventDefault();
+    console.log("file: ", e.target.files[0]);
+  }
+
+  return <>
+    <form onSubmit={handleFileChange}>
+      <input type="text" placeholder='Name' />
+      <input type="file" />
+      <button type="submit">Upload</button>
+    </form>
+  </>
+};
+
+export default Upload;

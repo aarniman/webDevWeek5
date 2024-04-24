@@ -19,8 +19,9 @@ const MediaRow = (props) => {
       <td>{new Date(item.created_at).toLocaleString('fi-FI')}</td>
       <td>{item.filesize}</td>
       <td>{item.media_type}</td>
+      <td>{item.user}</td>
       <td>
-        <Link to={`/media/${item.media_id}`} state={{ item }}>Show</Link>
+        <Link to='/single' state={{ item }}>Show</Link>
       </td>
     </tr>
   );
