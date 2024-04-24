@@ -1,30 +1,42 @@
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import SingleView from '../components/SingleView';
-import mediaArray from '../data/mediaArray';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-function Single() {
-  const location = useLocation();
-  const params = useParams();
+const Single = () => {
   const navigate = useNavigate();
-  const id = Number(params.id);
-
-  let item;
-  if (!location.state?.item) {
-    item = mediaArray.find(({ media_id }) => Number(media_id) === id);
-  } else {
-    item = location.state.item;
-  }
-
-  if (!item) {
-    return <>Item not found</>;
-  }
+  const { state } = useLocation();
+  const item = state.item;
 
   return (
-    <SingleView
-      item={item}
-      setSelectedItem={() => navigate(-1)}
-    />
-  );
+    <dialog
+      className="fixed top-0 h-dvh w-dvw bg-black bg-opacity-50 p-4 text-stone-100"
+      open={item ? true : false}
+    >
+      <p>
+        <button onClick={() => navigate(-1)}>Go back</button>
+      </p>
+      {item && (
+        <>
+          {item.media_type.includes('video') ? (
+            <video className="m-auto h-3/4 content-center" controls>
+              <source
+                src={item.filename}
+                type={item.media_type}
+              />
+            </video>
+          ) : (
+            <img
+              className="m-auto h-3/4"
+              src={item.filename}
+              alt={item.title}
+            />
+          )}
+          <h2>{item.title}</h2>
+          <p>{item.description}</p>
+          <p>Created: {new Date(item.created_at).toLocaleString()}</p>
+          <p>Size: {item.filesize}</p>
+        </>
+      )}
+    </dialog>
+  )
 }
 
 export default Single;
