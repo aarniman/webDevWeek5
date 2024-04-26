@@ -1,33 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import MediaRow from '../components/MediaRow';
 import SingleView from '../components/SingleView';
-import { fetchData } from '../utils/fetchData';
+import { useMedia } from '../hooks/apiHooks';
 
 const Home = () => {
-  const [mediaArray, setMediaArray] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const getMedia = async () => {
+  const { mediaArray } = useMedia();
 
-    const json = await fetchData(import.meta.env.VITE_MEDIA_API + '/media');
-
-    const getUser = await Promise.all(
-      json.map(async (media) => {
-        console.log("ID: ", media.user_id)
-        const user = await fetchData(import.meta.env.VITE_AUTH_API + `/users/${media.user_id}`);
-        return { ...media, user: user.username };
-      })
-    );
-
-    setMediaArray(getUser);
-  };
-
-  useEffect(() => {
-    getMedia();
-  }, []);
-
-  console.log("mediaArray: ", mediaArray);
-  console.log("selectedItem: ", selectedItem)
   return (
     <>
       <SingleView item={selectedItem} setSelectedItem={setSelectedItem} />
