@@ -1,8 +1,9 @@
 import useForm from "../hooks/formHooks";
-import { useAuthentication } from "../hooks/apiHooks";
+import { useUserContext } from "../contexts/UserContext";
 
 const LoginForm = () => {
-  const { postLogin } = useAuthentication();
+
+  const { handleLogin } = useUserContext();
 
   const initValues = {
     username: '',
@@ -11,11 +12,11 @@ const LoginForm = () => {
 
   const doLogin = async () => {
     console.log(inputs);
-    // TODO: add login functionalities here
-    const result = await postLogin(inputs);
-    localStorage.setItem('token', result.token);
-    console.log("Result: ", result);
-    console.log("Token: ", result.token);
+    try {
+      handleLogin(inputs);
+    } catch (e) {
+      alert(e.message);
+    }
 
   };
 
