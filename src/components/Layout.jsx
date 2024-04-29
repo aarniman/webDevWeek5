@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom';
-import { useUserContext } from '../hooks/ContextHooks';
+import { useUserContext } from '../hooks/contextHooks';
 
 
 const Layout = () => {
